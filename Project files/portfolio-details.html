@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Waste Classification Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            color: #333;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 1rem 0;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            padding: 1rem;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            text-align: center;
+        }
+        .upload-box {
+            border: 2px dashed #ccc;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 5px;
+        }
+        .prediction-result {
+            background-color: #f4f4f4;
+            padding: 1rem;
+            border-radius: 5px;
+            margin-top: 1rem;
+            font-weight: bold;
+        }
+        .error-message {
+            color: red;
+            margin: 1rem 0;
+        }
+        .btn {
+            display: inline-block;
+            background-color: #4CAF50;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            text-decoration: none;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+        .uploaded-image {
+            max-width: 300px;
+            margin: 1rem auto;
+            display: block;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1rem 0;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/about">About</a>
+            <a href="/predict">Predict</a>
+            <a href="/contact">Contact</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h1>Image Classification</h1>
+
+        <form action="/predict" method="post" enctype="multipart/form-data" class="upload-box">
+            <h3>Upload Your Image:</h3>
+            <input type="file" name="pc_image" id="pc_image" accept="image/*" required>
+            <button type="submit" class="btn">Predict</button>
+        </form>
+
+        {% if error %}
+        <div class="error-message">
+            <h3>Error:</h3>
+            <p>{{ error }}</p>
+        </div>
+        {% endif %}
+
+        {% if image_path %}
+        <div>
+            <h3>Uploaded Image:</h3>
+            <img src="{{ image_path }}" alt="Uploaded waste image" class="uploaded-image">
+        </div>
+        {% endif %}
+
+        {% if predict %}
+        <div class="prediction-result">
+            <h3>Prediction Result:</h3>
+            <p>{{ predict }}</p>
+        </div>
+        {% endif %}
+    </div>
+
+    <footer>
+        <p>&copy; 2023 GreenGuard Insights. All rights reserved.</p>
+    </footer>
+</body>
+</html>
